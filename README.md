@@ -22,12 +22,6 @@
 
 ---
 
-## 📸 Screenshot
-
-<p align="center">
-  <img src="screenshot.svg" alt="Dashboard Screenshot" width="80%">
-</p>
-
 ## ✨ Features
 
 - ✅ **22 automatische Sensoren** - Umfassende Überwachung aller Leasingdaten
