@@ -61,7 +61,7 @@
 
 ## 🚀 Installation
 
-### Via HACS (empfohlen)
+### Via HACS - Kommt in Zukunft...
 
 1. HACS in Home Assistant öffnen
 2. "Integrationen" → ⋮ → "Benutzerdefinierte Repositories"
@@ -72,7 +72,7 @@
 5. Home Assistant neu starten
 6. Integration über UI hinzufügen
 
-### Manuell
+### Manuell (aktuell nur möglich)
 
 1. Lade Sie die neueste Version herunter: [Releases](https://github.com/foxxxhater/hacs_leasing_tracker/releases)
 2. Entpacke Sie das Archiv
