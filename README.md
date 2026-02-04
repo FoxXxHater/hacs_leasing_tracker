@@ -181,4 +181,4 @@ Wenn Ihnen diese Integration hilft, geben Sie dem Projekt gerne einen Stern! ⭐
 
 Entwickelt mit ❤️ für die Home Assistant Community
 
-P.S. mit freundlicher Unterstüzung con Claude (Code) und Gemini (Bild)
+P.S. mit freundlicher Unterstüzung con Claude
