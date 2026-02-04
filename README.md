@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://github.com/DEIN-USERNAME/leasing_tracker/releases">
-    <img src="https://img.shields.io/github/release/DEIN-USERNAME/leasing_tracker.svg?style=flat-square" alt="GitHub Release">
+    <img src="https://img.shields.io/github/release/foxxxhater/hacs_leasing_tracker.svg?style=flat-square" alt="GitHub Release">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/DEIN-USERNAME/leasing_tracker.svg?style=flat-square" alt="License">
+    <img src="https://img.shields.io/github/license/foxxxhater/hacs_leasing_tracker.svg?style=flat-square" alt="License">
   </a>
   <a href="https://github.com/hacs/integration">
     <img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=flat-square" alt="HACS">
