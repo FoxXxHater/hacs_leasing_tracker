@@ -152,11 +152,11 @@ automation:
 
 Contributions sind willkommen! 
 
-1. Fork das Repository
-2. Erstelle einen Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
+1. Forken Sie das Repository
+2. Erstelle Sie einen Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit Sie Ihre Änderungen (`git commit -m 'Add some AmazingFeature'`)
 4. Push zum Branch (`git push origin feature/AmazingFeature`)
-5. Öffne einen Pull Request
+5. Öffnen Sie einen Pull Request
 
 ## 📄 Lizenz
 
@@ -170,7 +170,7 @@ Dieses Projekt ist unter der MIT License lizenziert - siehe [LICENSE](LICENSE) f
 
 ## ⭐ Danke!
 
-Wenn dir diese Integration hilft, gib dem Projekt einen Stern! ⭐
+Wenn Ihnen diese Integration hilft, geben Sie dem Projekt gerne einen Stern! ⭐
 
 ---
 
