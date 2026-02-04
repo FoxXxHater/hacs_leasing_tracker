@@ -1,0 +1,115 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Leasing Tracker einrichten",
+        "description": "Geben Sie die Details Ihres Leasingvertrags ein.",
+        "data": {
+          "name": "Name",
+          "current_km_entity": "Aktueller Kilometerstand (Sensor)",
+          "start_date": "Start-Datum des Leasings",
+          "end_date": "End-Datum des Leasings",
+          "start_km": "Kilometerstand bei Start",
+          "km_per_year": "Erlaubte Kilometer pro Jahr"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "Das End-Datum muss nach dem Start-Datum liegen.",
+      "unknown": "Ein unbekannter Fehler ist aufgetreten."
+    },
+    "abort": {
+      "already_configured": "Ein Leasing Tracker mit diesem Namen existiert bereits."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Leasing Tracker Optionen",
+        "description": "Aktualisieren Sie die Einstellungen für Ihren Leasing Tracker.",
+        "data": {
+          "name": "Name",
+          "current_km_entity": "Aktueller Kilometerstand (Sensor)",
+          "start_date": "Start-Datum des Leasings",
+          "end_date": "End-Datum des Leasings",
+          "start_km": "Kilometerstand bei Start",
+          "km_per_year": "Erlaubte Kilometer pro Jahr"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "Das End-Datum muss nach dem Start-Datum liegen.",
+      "unknown": "Ein unbekannter Fehler ist aufgetreten."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "remaining_km_total": {
+        "name": "Verbleibende KM Gesamt"
+      },
+      "remaining_km_year": {
+        "name": "Schätzung Verbleibende KM dieses Jahr"
+      },
+      "remaining_km_month": {
+        "name": "Schätzung Verbleibende KM diesen Monat"
+      },
+      "remaining_km_year_actual": {
+        "name": "Verbleibende KM dieses Jahr"
+      },
+      "remaining_km_month_actual": {
+        "name": "Verbleibende KM diesen Monat"
+      },
+      "estimated_km_year_end": {
+        "name": "Schätzung KM am Jahresende"
+      },
+      "estimated_km_month_end": {
+        "name": "Schätzung KM am Monatsende"
+      },
+      "remaining_days": {
+        "name": "Verbleibende Tage"
+      },
+      "remaining_months": {
+        "name": "Verbleibende Monate"
+      },
+      "total_km_driven": {
+        "name": "Gefahrene KM"
+      },
+      "km_driven_this_month": {
+        "name": "Gefahrene KM diesen Monat"
+      },
+      "km_driven_this_year": {
+        "name": "Gefahrene KM dieses Jahr"
+      },
+      "km_per_day_average": {
+        "name": "Durchschnitt KM pro Tag"
+      },
+      "km_per_month_average": {
+        "name": "Durchschnitt KM pro Monat"
+      },
+      "allowed_km_total": {
+        "name": "Erlaubte KM Gesamt"
+      },
+      "allowed_km_per_month": {
+        "name": "Erlaubte KM pro Monat (Durchschnitt)"
+      },
+      "allowed_km_this_year": {
+        "name": "Erlaubte KM dieses Jahr"
+      },
+      "allowed_km_this_month": {
+        "name": "Erlaubte KM diesen Monat"
+      },
+      "days_total": {
+        "name": "Leasingdauer in Tagen"
+      },
+      "progress_percentage": {
+        "name": "Fortschritt"
+      },
+      "km_difference": {
+        "name": "KM Differenz zum Plan"
+      },
+      "status": {
+        "name": "Status"
+      }
+    }
+  }
+}

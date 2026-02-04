@@ -1,0 +1,115 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Leasing Tracker",
+        "description": "Enter the details of your leasing contract.",
+        "data": {
+          "name": "Name",
+          "current_km_entity": "Current Mileage (Sensor)",
+          "start_date": "Lease Start Date",
+          "end_date": "Lease End Date",
+          "start_km": "Mileage at Start",
+          "km_per_year": "Allowed Kilometers per Year"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "End date must be after start date.",
+      "unknown": "An unknown error occurred."
+    },
+    "abort": {
+      "already_configured": "A Leasing Tracker with this name already exists."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Leasing Tracker Options",
+        "description": "Update the settings for your Leasing Tracker.",
+        "data": {
+          "name": "Name",
+          "current_km_entity": "Current Mileage (Sensor)",
+          "start_date": "Lease Start Date",
+          "end_date": "Lease End Date",
+          "start_km": "Mileage at Start",
+          "km_per_year": "Allowed Kilometers per Year"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "End date must be after start date.",
+      "unknown": "An unknown error occurred."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "remaining_km_total": {
+        "name": "Remaining KM Total"
+      },
+      "remaining_km_year": {
+        "name": "Estimated Remaining KM This Year"
+      },
+      "remaining_km_month": {
+        "name": "Estimated Remaining KM This Month"
+      },
+      "remaining_km_year_actual": {
+        "name": "Remaining KM This Year"
+      },
+      "remaining_km_month_actual": {
+        "name": "Remaining KM This Month"
+      },
+      "estimated_km_year_end": {
+        "name": "Estimated KM at Year End"
+      },
+      "estimated_km_month_end": {
+        "name": "Estimated KM at Month End"
+      },
+      "remaining_days": {
+        "name": "Remaining Days"
+      },
+      "remaining_months": {
+        "name": "Remaining Months"
+      },
+      "total_km_driven": {
+        "name": "Total KM Driven"
+      },
+      "km_driven_this_month": {
+        "name": "KM Driven This Month"
+      },
+      "km_driven_this_year": {
+        "name": "KM Driven This Year"
+      },
+      "km_per_day_average": {
+        "name": "Average KM per Day"
+      },
+      "km_per_month_average": {
+        "name": "Average KM per Month"
+      },
+      "allowed_km_total": {
+        "name": "Allowed KM Total"
+      },
+      "allowed_km_per_month": {
+        "name": "Allowed KM per Month (Average)"
+      },
+      "allowed_km_this_year": {
+        "name": "Allowed KM This Year"
+      },
+      "allowed_km_this_month": {
+        "name": "Allowed KM This Month"
+      },
+      "days_total": {
+        "name": "Lease Duration in Days"
+      },
+      "progress_percentage": {
+        "name": "Progress"
+      },
+      "km_difference": {
+        "name": "KM Difference to Plan"
+      },
+      "status": {
+        "name": "Status"
+      }
+    }
+  }
+}
