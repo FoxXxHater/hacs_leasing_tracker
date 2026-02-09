@@ -26,8 +26,10 @@
   <img src="SCREENSHOT.png" alt="Dashboard Screenshot" high="15%">
 </p>
 
-- made with the <a href="https://github.com/WJDDesigns/Ultra-Vehicle-Card" alt="Link to Ultra Vehicle Card">Ultra Vehicle Card</a> and <a href="https://github.com/th3jesta/ha-lcars" alt="Link to HA-LCARS">HA-LCARS</a> because, YES i am a Star Trek Fan...
-And of course with the <a href="https://github.com/skodaconnect/homeassistant-myskoda">MySkoda</a> Integration - huge Thanks to all great Dev out there!
+- made with the <a href="https://github.com/WJDDesigns/Ultra-Vehicle-Card" alt="Link to Ultra Vehicle Card">Ultra Vehicle Card</a>, <a href="https://github.com/th3jesta/ha-lcars" alt="Link to HA-LCARS">HA-LCARS</a> (YES i am a Star Trek Fan...), <a href="https://github.com/skodaconnect/homeassistant-myskoda">MySkoda</a> Integraion and of course <a href="https://github.com/foxxxhater/hacs_leasing_tracker_card/" alt="Link to Leasing Tracker Card">My Leasing Tracker Card</a>
+
+
+A huge Thanks to all great Dev out there!
 
 ---
 
@@ -42,7 +44,7 @@ And of course with the <a href="https://github.com/skodaconnect/homeassistant-my
 
 ## 🔦 Passend dazu
 
-**Meine Leasing Tracker Card** --> <a href="https://github.com/FoxXxHater/hacs_leasing_tracker_card" alt="Link to my Crad Projekt">Link</a>
+<a href="https://github.com/FoxXxHater/hacs_leasing_tracker_card" alt="Link to my Crad Projekt">**Meine Leasing Tracker Card**</a>
 
 ## 📊 Sensoren
 
