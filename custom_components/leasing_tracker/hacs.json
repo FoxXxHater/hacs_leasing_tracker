@@ -1,5 +1,4 @@
 {
   "name": "Leasing Tracker",
-  "render_readme": true,
-  "domains": ["leasing_tracker"]
+  "render_readme": true
 }
