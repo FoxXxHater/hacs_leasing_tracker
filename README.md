@@ -5,11 +5,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/foxxxhater/hacs_leasing_tracker/releases">
-    <img src="https://img.shields.io/github/release/foxxxhater/hacs_leasing_tracker.svg?style=flat-square" alt="GitHub Release">
+  <a href="https://github.com/foxxxhater/leasing-tracker/releases">
+    <img src="https://img.shields.io/github/release/foxxxhater/leasing-tracker.svg?style=flat-square" alt="GitHub Release">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/foxxxhater/hacs_leasing_tracker.svg?style=flat-square" alt="License">
+    <img src="https://img.shields.io/github/license/foxxxhater/leasing-tracker.svg?style=flat-square" alt="License">
   </a>
   <a href="https://github.com/hacs/integration">
     <img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=flat-square" alt="HACS">
@@ -26,7 +26,7 @@
   <img src="SCREENSHOT.png" alt="Dashboard Screenshot" high="15%">
 </p>
 
-- made with the <a href="https://github.com/WJDDesigns/Ultra-Vehicle-Card" alt="Link to Ultra Vehicle Card">Ultra Vehicle Card</a>, <a href="https://github.com/th3jesta/ha-lcars" alt="Link to HA-LCARS">HA-LCARS</a> (YES i am a Star Trek Fan...), <a href="https://github.com/skodaconnect/homeassistant-myskoda">MySkoda</a> Integraion and of course <a href="https://github.com/foxxxhater/hacs_leasing_tracker_card/" alt="Link to Leasing Tracker Card">My Leasing Tracker Card</a>
+- made with the <a href="https://github.com/WJDDesigns/Ultra-Vehicle-Card" alt="Link to Ultra Vehicle Card">Ultra Vehicle Card</a>, <a href="https://github.com/th3jesta/ha-lcars" alt="Link to HA-LCARS">HA-LCARS</a> (YES i am a Star Trek Fan...), <a href="https://github.com/skodaconnect/homeassistant-myskoda">MySkoda</a> Integraion and of course <a href="https://github.com/foxxxhater/leasing-tracker-card/" alt="Link to Leasing Tracker Card">My Leasing Tracker Card</a>
 
 
 A huge Thanks to all great Dev out there!
@@ -44,7 +44,7 @@ A huge Thanks to all great Dev out there!
 
 ## 🔦 Passend dazu
 
-<a href="https://github.com/FoxXxHater/hacs_leasing_tracker_card" alt="Link to my Crad Projekt">**Meine Leasing Tracker Card**</a>
+<a href="https://github.com/FoxXxHater/leasing-tracker-card" alt="Link to my Crad Projekt">**Meine Leasing Tracker Card**</a>
 
 ## 📊 Sensoren
 
@@ -81,7 +81,7 @@ A huge Thanks to all great Dev out there!
 1. HACS in Home Assistant öffnen
 2. "Integrationen" → ⋮ → "Benutzerdefinierte Repositories"
 3. Repository hinzufügen:
-   - URL: `https://github.com/foxxxhater/hacs_leasing_tracker`
+   - URL: `https://github.com/foxxxhater/leasing-tracker`
    - Kategorie: "Integration"
 4. "Leasing Tracker" suchen und installieren
 5. Home Assistant neu starten
@@ -89,7 +89,7 @@ A huge Thanks to all great Dev out there!
 
 ### Manuell
 
-1. Lade Sie die neueste Version herunter: [Releases](https://github.com/foxxxhater/hacs_leasing_tracker/releases)
+1. Lade Sie die neueste Version herunter: [Releases](https://github.com/foxxxhater/leasing-tracker/releases)
 2. Entpacke Sie das Archiv
 3. Kopieren Sie den `leasing_tracker` Ordner nach `custom_components/`
 4. Home Assistant neu starten
@@ -166,7 +166,7 @@ automation:
 - [📝 Changelog](CHANGELOG.md)
 
 ## 🐛 Fehler & Probleme
-→ [Issue erstellen](https://github.com/foxxxhater/hacs_leasing_tracker/issues)
+→ [Issue erstellen](https://github.com/foxxxhater/leasing-tracker/issues)
 
 ## 🤝 Beitragen
 
@@ -184,8 +184,8 @@ Dieses Projekt ist unter der MIT License lizenziert - siehe [LICENSE](LICENSE) f
 
 ## 💬 Support
 
-- 🐛 [Issues](https://github.com/foxxxhater/hacs_leasing_tracker/issues)
-- 💡 [Discussions](https://github.com/foxxxhater/hacs_leasing_tracker/discussions)
+- 🐛 [Issues](https://github.com/foxxxhater/leasing-tracker/issues)
+- 💡 [Discussions](https://github.com/foxxxhater/leasing-tracker/discussions)
 - 🏠 [Home Assistant Community Forum](https://community.home-assistant.io/)
 
 ## ⭐ Danke!
