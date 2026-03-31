@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.5] - 30-03-2025
+## [1.2.0] - 30-03-2025
 
 ### Added
 - 🇺🇸 **Imperial Units Support (Miles)**
@@ -20,7 +20,7 @@
 - Automatic unit conversion based on `unit_system` config
 - All distance sensors respect the chosen unit system
 
-## [1.1.4] - 30-03-2026
+## [1.1.6] - 30-03-2026
 
 ### Fixed
 - ✅ **Multi-language support now working!**
@@ -38,7 +38,7 @@
 ### Changed
 - Refactored sensor.py to use `_attr_translation_key` instead of `_attr_name`
 - All sensor names now come from translation files
-- Cangelog now will be written on englisch
+- Cangelog now will be written on englisch - delete the german
 
 
 ## [1.1.3] - 04-02-2026

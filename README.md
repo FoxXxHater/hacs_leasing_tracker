@@ -33,9 +33,10 @@ A huge Thanks to all great Dev out there!
 
 ---
 
-## <a href="https://github.com/FoxXxHater/leasing-tracker/blob/main/README-DE.md">Deutsche README
+## ⚠️ BREAKING CHANGES?
+- You have to delete the old entities and create it new!
 
-## ✨ What's New in v1.1.5
+## ✨ What's New in v1.2.0
 
 🇺🇸 **Imperial Units (Miles) Support!**
 - Choose between Metric (km) or Imperial (miles) during setup
