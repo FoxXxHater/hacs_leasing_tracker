@@ -18,6 +18,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
 
 from .const import (
+    CONF_UNIT_SYSTEM,
     CONF_CURRENT_KM_ENTITY,
     CONF_END_DATE,
     CONF_KM_PER_YEAR,
@@ -50,6 +51,10 @@ from .const import (
 )
 
 _LOGGER = logging.getLogger(__name__)
+
+# Conversion factors
+KM_TO_MILES = 0.621371
+MILES_TO_KM = 1.609344
 
 
 async def async_setup_entry(
@@ -104,10 +109,13 @@ class LeasingTrackerSensor(SensorEntity):
         """Initialize the sensor."""
         self.hass = hass
         self._entry = entry
-        self._config = entry.data
         self._sensor_type = sensor_type
         self._attr_unique_id = f"{entry.entry_id}_{sensor_type}"
-        self._current_km_entity = self._config[CONF_CURRENT_KM_ENTITY]
+        self._current_km_entity = entry.data[CONF_CURRENT_KM_ENTITY]
+        
+        # Get config from entry (always fresh)
+        self._is_metric = entry.data.get(CONF_UNIT_SYSTEM, "metric") == "metric"
+        _LOGGER.debug("Leasing Tracker: unit_system=%s, is_metric=%s", entry.data.get(CONF_UNIT_SYSTEM, "metric"), self._is_metric)
         
         # Device Info
         self._attr_device_info = DeviceInfo(
@@ -124,159 +132,172 @@ class LeasingTrackerSensor(SensorEntity):
         """Set up sensor-specific attributes."""
         sensor_configs = {
             SENSOR_REMAINING_KM_TOTAL: {
-                "name": "Verbleibende KM Gesamt",
+                "translation_key": "remaining_km_total",
                 "icon": "mdi:counter",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_KM_YEAR: {
-                "name": "Schätzung Verbleibende KM dieses Jahr",
+                "translation_key": "remaining_km_year",
                 "icon": "mdi:calendar-clock",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_KM_MONTH: {
-                "name": "Schätzung Verbleibende KM diesen Monat",
+                "translation_key": "remaining_km_month",
                 "icon": "mdi:calendar-month",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_KM_YEAR_ACTUAL: {
-                "name": "Verbleibende KM dieses Jahr",
+                "translation_key": "remaining_km_year_actual",
                 "icon": "mdi:calendar-today",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_KM_MONTH_ACTUAL: {
-                "name": "Verbleibende KM diesen Monat",
-                "icon": "mdi:calendar-month-outline",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "remaining_km_month_actual",
+                "icon": "mdi:calendar-today",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ESTIMATED_KM_YEAR_END: {
-                "name": "Schätzung KM am Jahresende",
+                "translation_key": "estimated_km_year_end",
                 "icon": "mdi:chart-timeline-variant",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ESTIMATED_KM_MONTH_END: {
-                "name": "Schätzung KM am Monatsende",
-                "icon": "mdi:chart-bell-curve",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "estimated_km_month_end",
+                "icon": "mdi:chart-timeline-variant",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_DAYS: {
-                "name": "Verbleibende Tage",
+                "translation_key": "remaining_days",
                 "icon": "mdi:calendar-end",
-                "unit": "Tage",
+                "unit": "days",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_REMAINING_MONTHS: {
-                "name": "Verbleibende Monate",
-                "icon": "mdi:calendar-range",
-                "unit": "Monate",
+                "translation_key": "remaining_months",
+                "icon": "mdi:calendar-month-outline",
+                "unit": "months",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_TOTAL_KM_DRIVEN: {
-                "name": "Gefahrene KM",
+                "translation_key": "total_km_driven",
                 "icon": "mdi:speedometer",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.TOTAL_INCREASING,
             },
             SENSOR_KM_DRIVEN_THIS_MONTH: {
-                "name": "Gefahrene KM diesen Monat",
-                "icon": "mdi:calendar-check",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "km_driven_this_month",
+                "icon": "mdi:calendar-month",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_KM_DRIVEN_THIS_YEAR: {
-                "name": "Gefahrene KM dieses Jahr",
-                "icon": "mdi:calendar-star",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "km_driven_this_year",
+                "icon": "mdi:calendar",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_KM_PER_DAY_AVERAGE: {
-                "name": "Durchschnitt KM pro Tag",
+                "translation_key": "km_per_day_average",
                 "icon": "mdi:chart-line",
-                "unit": "km/Tag",
+                "unit": "km/day",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_KM_PER_MONTH_AVERAGE: {
-                "name": "Durchschnitt KM pro Monat",
+                "translation_key": "km_per_month_average",
                 "icon": "mdi:chart-bar",
-                "unit": "km/Monat",
+                "unit": "km/month",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ALLOWED_KM_TOTAL: {
-                "name": "Erlaubte KM Gesamt",
-                "icon": "mdi:car-info",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "allowed_km_total",
+                "icon": "mdi:sign-direction",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ALLOWED_KM_PER_MONTH: {
-                "name": "Erlaubte KM pro Monat (Durchschnitt)",
-                "icon": "mdi:calendar-check",
-                "unit": "km/Monat",
+                "translation_key": "allowed_km_per_month",
+                "icon": "mdi:calendar-month",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
+                "device_class": SensorDeviceClass.DISTANCE,
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ALLOWED_KM_THIS_YEAR: {
-                "name": "Erlaubte KM dieses Jahr",
-                "icon": "mdi:calendar-text",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "allowed_km_this_year",
+                "icon": "mdi:calendar",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ALLOWED_KM_THIS_MONTH: {
-                "name": "Erlaubte KM diesen Monat",
-                "icon": "mdi:calendar-outline",
-                "unit": UnitOfLength.KILOMETERS,
+                "translation_key": "allowed_km_this_month",
+                "icon": "mdi:calendar-month",
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_DAYS_TOTAL: {
-                "name": "Leasingdauer in Tagen",
-                "icon": "mdi:calendar-today",
-                "unit": "Tage",
+                "translation_key": "days_total",
+                "icon": "mdi:calendar-range",
+                "unit": "days",
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_PROGRESS_PERCENTAGE: {
-                "name": "Fortschritt",
-                "icon": "mdi:progress-clock",
+                "translation_key": "progress_percentage",
+                "icon": "mdi:percent",
                 "unit": "%",
+                "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_KM_DIFFERENCE: {
-                "name": "KM Differenz zum Plan",
+                "translation_key": "km_difference",
                 "icon": "mdi:delta",
-                "unit": UnitOfLength.KILOMETERS,
+                "unit": UnitOfLength.KILOMETERS if self._is_metric else UnitOfLength.MILES,
                 "device_class": SensorDeviceClass.DISTANCE,
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_STATUS: {
-                "name": "Status",
-                "icon": "mdi:information",
+                "translation_key": "status",
+                "icon": "mdi:information-outline",
+                "device_class": SensorDeviceClass.ENUM,
+                "options": ["on_plan", "over_plan", "significantly_over_plan", "under_plan"],
             },
         }
 
         config = sensor_configs.get(self._sensor_type, {})
-        self._attr_name = config.get("name")
+        
+        # Set translation key instead of name
+        self._attr_translation_key = config.get("translation_key")
         self._attr_icon = config.get("icon")
         self._attr_native_unit_of_measurement = config.get("unit")
-        if "device_class" in config:
-            self._attr_device_class = config["device_class"]
-        if "state_class" in config:
-            self._attr_state_class = config["state_class"]
+        self._attr_device_class = config.get("device_class")
+        self._attr_state_class = config.get("state_class")
+        
+        # For enum sensors (like status)
+        if config.get("options"):
+            self._attr_options = config.get("options")
 
     async def async_added_to_hass(self) -> None:
         """Register callbacks."""
         @callback
         def sensor_state_listener(event):
-            """Handle state changes of the current KM entity."""
+            """Handle sensor state changes."""
             self.async_schedule_update_ha_state(True)
 
         self.async_on_remove(
@@ -285,219 +306,166 @@ class LeasingTrackerSensor(SensorEntity):
             )
         )
 
-    @property
-    def extra_state_attributes(self) -> dict[str, Any]:
-        """Return additional state attributes."""
-        calculations = self._calculate_values()
+    def update(self) -> None:
+        """Update the sensor."""
+        current_km_state = self.hass.states.get(self._current_km_entity)
         
-        return {
-            "start_date": self._config[CONF_START_DATE],
-            "end_date": self._config[CONF_END_DATE],
-            "start_km": self._config[CONF_START_KM],
-            "km_per_year": self._config[CONF_KM_PER_YEAR],
-            "current_km_entity": self._current_km_entity,
-        }
+        if current_km_state is None or current_km_state.state in ["unknown", "unavailable"]:
+            self._attr_native_value = None
+            self._attr_available = False
+            return
 
-    def _get_current_km(self) -> float | None:
-        """Get current KM from entity."""
-        state = self.hass.states.get(self._current_km_entity)
-        if state is None or state.state in ["unknown", "unavailable"]:
-            return None
-        
         try:
-            return float(state.state)
+            current_km = float(current_km_state.state)
         except (ValueError, TypeError):
-            _LOGGER.warning(
-                "Could not convert current KM state to float: %s", state.state
-            )
-            return None
+            self._attr_native_value = None
+            self._attr_available = False
+            return
 
-    def _calculate_values(self) -> dict[str, Any]:
-        """Calculate all leasing values."""
-        current_km = self._get_current_km()
-        if current_km is None:
-            return {}
+        self._attr_available = True
 
-        # Datumswerte parsen
-        start_date = datetime.fromisoformat(self._config[CONF_START_DATE])
-        end_date = datetime.fromisoformat(self._config[CONF_END_DATE])
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        
-        # Basisdaten
-        start_km = self._config[CONF_START_KM]
-        km_per_year = self._config[CONF_KM_PER_YEAR]
-        
-        # Zeitberechnungen
+        # Get config values
+        start_date = datetime.fromisoformat(self._entry.data[CONF_START_DATE])
+        end_date = datetime.fromisoformat(self._entry.data[CONF_END_DATE])
+        start_km = self._entry.data[CONF_START_KM]
+        km_per_year = self._entry.data[CONF_KM_PER_YEAR]
+
+        # Calculate values
+        now = datetime.now()
         total_days = (end_date - start_date).days
-        days_passed = (today - start_date).days
-        remaining_days = (end_date - today).days
+        elapsed_days = (now - start_date).days
+        remaining_days = (end_date - now).days
         
-        # Monatliche Berechnungen
-        total_months = total_days / 30.44  # Durchschnittliche Tage pro Monat
-        months_passed = days_passed / 30.44
-        remaining_months = remaining_days / 30.44
+        # Current year/month
+        year_start = datetime(now.year, 1, 1)
+        month_start = datetime(now.year, now.month, 1)
         
-        # Jahre Berechnungen
-        total_years = total_days / 365.25
-        years_passed = days_passed / 365.25
+        # Days in current periods
+        days_in_year = (datetime(now.year, 12, 31) - year_start).days + 1
+        if now.month == 12:
+            days_in_month = (datetime(now.year, 12, 31) - month_start).days + 1
+        else:
+            next_month = datetime(now.year, now.month + 1, 1)
+            days_in_month = (next_month - month_start).days
         
-        # KM Berechnungen
-        allowed_km_total = int(km_per_year * total_years)
-        allowed_km_per_month = int(km_per_year / 12)
-        total_km_driven = int(current_km - start_km)
+        # Remaining days in periods
+        remaining_days_year = (datetime(now.year, 12, 31) - now).days
+        if now.month == 12:
+            remaining_days_month = (datetime(now.year, 12, 31) - now).days
+        else:
+            next_month = datetime(now.year, now.month + 1, 1)
+            remaining_days_month = (next_month - now).days
+
+        # Total driven
+        total_km_driven = current_km - start_km
         
-        # Durchschnittswerte
-        km_per_day_average = (
-            round(total_km_driven / days_passed, 2) if days_passed > 0 else 0
-        )
-        km_per_month_average = (
-            round(total_km_driven / months_passed, 2) if months_passed > 0 else 0
-        )
+        # Allowed KM
+        allowed_km_total = (total_days / 365.25) * km_per_year
+        allowed_km_per_month = km_per_year / 12
         
-        # Sollwert KM basierend auf verstrichener Zeit
-        should_have_driven = int((allowed_km_total / total_days) * days_passed)
-        km_difference = total_km_driven - should_have_driven
+        # Year calculations
+        if year_start >= start_date:
+            days_into_year = (now - year_start).days
+            allowed_km_this_year = (days_into_year / days_in_year) * km_per_year
+            
+            # Find KM at year start
+            if year_start > start_date:
+                days_at_year_start = (year_start - start_date).days
+                allowed_km_at_year_start = (days_at_year_start / total_days) * allowed_km_total + start_km
+            else:
+                allowed_km_at_year_start = start_km
+                
+            km_driven_this_year = current_km - allowed_km_at_year_start
+        else:
+            km_driven_this_year = total_km_driven
+            allowed_km_this_year = (elapsed_days / 365.25) * km_per_year
         
-        # Verbleibende KM gesamt
+        # Month calculations  
+        if month_start >= start_date:
+            days_into_month = (now - month_start).days
+            allowed_km_this_month = (days_into_month / days_in_month) * allowed_km_per_month
+            
+            # Find KM at month start
+            if month_start > start_date:
+                days_at_month_start = (month_start - start_date).days
+                allowed_km_at_month_start = (days_at_month_start / total_days) * allowed_km_total + start_km
+            else:
+                allowed_km_at_month_start = start_km
+                
+            km_driven_this_month = current_km - allowed_km_at_month_start
+        else:
+            km_driven_this_month = total_km_driven
+            allowed_km_this_month = (elapsed_days / 30.44) * allowed_km_per_month
+
+        # Averages
+        if elapsed_days > 0:
+            km_per_day = total_km_driven / elapsed_days
+            km_per_month = total_km_driven / (elapsed_days / 30.44)
+        else:
+            km_per_day = 0
+            km_per_month = 0
+
+        # Remaining KM
         remaining_km_total = allowed_km_total - total_km_driven
-        
-        # ============================================
-        # JAHR-BERECHNUNGEN (aktuelles Kalenderjahr)
-        # ============================================
-        current_year_start = datetime(today.year, 1, 1)
-        if start_date > current_year_start:
-            current_year_start = start_date
-        
-        current_year_end = datetime(today.year, 12, 31)
-        if end_date < current_year_end:
-            current_year_end = end_date
-        
-        days_in_current_year = (current_year_end - current_year_start).days + 1
-        allowed_km_this_year = int((km_per_year / 365.25) * days_in_current_year)
-        
-        # Berechne den KM-Stand zu Jahresbeginn
-        # Wir nehmen an, dass der durchschnittliche Verbrauch konstant war
-        days_from_start_to_year_start = max(0, (current_year_start - start_date).days)
-        if days_from_start_to_year_start > 0 and days_passed > 0:
-            km_at_year_start = start_km + (total_km_driven / days_passed * days_from_start_to_year_start)
-        else:
-            km_at_year_start = start_km
-        
-        # Gefahrene KM in diesem Jahr
-        km_driven_this_year = int(current_km - km_at_year_start)
-        
-        # Tatsächlich verbleibende KM dieses Jahr (ohne Schätzung)
         remaining_km_year_actual = allowed_km_this_year - km_driven_this_year
-        
-        # Geschätzte KM am Jahresende (basierend auf Durchschnitt)
-        days_passed_this_year = (today - current_year_start).days
-        days_remaining_this_year = (current_year_end - today).days
-        
-        if days_passed_this_year > 0 and km_per_day_average > 0:
-            estimated_km_year_end = int(km_driven_this_year + (km_per_day_average * days_remaining_this_year))
-            remaining_km_year_estimated = allowed_km_this_year - estimated_km_year_end
-        else:
-            estimated_km_year_end = km_driven_this_year
-            remaining_km_year_estimated = allowed_km_this_year
-        
-        # ============================================
-        # MONATS-BERECHNUNGEN (aktueller Monat)
-        # ============================================
-        current_month_start = datetime(today.year, today.month, 1)
-        
-        # Nächster Monat berechnen
-        if today.month < 12:
-            next_month_start = datetime(today.year, today.month + 1, 1)
-        else:
-            next_month_start = datetime(today.year + 1, 1, 1)
-        
-        days_in_month = (next_month_start - current_month_start).days
-        
-        # Erlaubte KM für diesen spezifischen Monat
-        # Berechne basierend auf dem durchschnittlichen Tagesbudget
-        daily_km_budget = km_per_year / 365.25
-        allowed_km_this_month = int(daily_km_budget * days_in_month)
-        
-        # Berechne den KM-Stand zu Monatsbeginn
-        days_from_start_to_month_start = max(0, (current_month_start - start_date).days)
-        if days_from_start_to_month_start > 0 and days_passed > 0:
-            km_at_month_start = start_km + (total_km_driven / days_passed * days_from_start_to_month_start)
-        else:
-            km_at_month_start = start_km if current_month_start <= start_date else current_km
-        
-        # Gefahrene KM in diesem Monat
-        km_driven_this_month = int(current_km - km_at_month_start)
-        
-        # Tatsächlich verbleibende KM diesen Monat (ohne Schätzung)
         remaining_km_month_actual = allowed_km_this_month - km_driven_this_month
         
-        # Geschätzte KM am Monatsende (basierend auf Durchschnitt)
-        days_passed_this_month = (today - current_month_start).days
-        days_remaining_this_month = (next_month_start - today).days
+        # Estimated remaining KM (at current pace)
+        remaining_km_year_estimated = remaining_days_year * km_per_day
+        remaining_km_month_estimated = remaining_days_month * km_per_day
         
-        if days_passed_this_month > 0 and km_per_day_average > 0:
-            estimated_km_month_end = int(km_driven_this_month + (km_per_day_average * days_remaining_this_month))
-            remaining_km_month_estimated = allowed_km_this_month - estimated_km_month_end
+        # Estimated total KM at end of periods
+        estimated_km_month_end = current_km + remaining_km_month_estimated
+        estimated_km_year_end = current_km + remaining_km_year_estimated
+        
+        # Difference
+        km_difference = total_km_driven - ((elapsed_days / total_days) * allowed_km_total)
+        
+        # Progress
+        progress = (elapsed_days / total_days) * 100 if total_days > 0 else 0
+        
+        # Status (using translation keys)
+        if km_difference < -500:
+            status = "under_plan"
+        elif km_difference <= 500:
+            status = "on_plan"
+        elif km_difference <= 2000:
+            status = "over_plan"
         else:
-            estimated_km_month_end = km_driven_this_month
-            remaining_km_month_estimated = allowed_km_this_month
+            status = "significantly_over_plan"
         
-        # Fortschritt in Prozent
-        progress_percentage = round((days_passed / total_days) * 100, 1) if total_days > 0 else 0
-        
-        # Status ermitteln
-        if km_difference > allowed_km_per_month:
-            status = "Deutlich über Plan"
-        elif km_difference > 0:
-            status = "Über Plan"
-        elif km_difference > -allowed_km_per_month:
-            status = "Im Plan"
-        else:
-            status = "Unter Plan"
+        # Remaining months
+        remaining_months = remaining_days / 30.44
 
-        return {
-            # Gesamt
-            "remaining_km_total": max(0, remaining_km_total),
-            "total_km_driven": total_km_driven,
-            "allowed_km_total": allowed_km_total,
-            "allowed_km_per_month": allowed_km_per_month,
-            
-            # Jahr - Schätzungen
-            "remaining_km_year": remaining_km_year_estimated,
-            "estimated_km_year_end": estimated_km_year_end,
-            
-            # Jahr - Tatsächlich
-            "remaining_km_year_actual": remaining_km_year_actual,
-            "km_driven_this_year": km_driven_this_year,
-            "allowed_km_this_year": allowed_km_this_year,
-            
-            # Monat - Schätzungen
-            "remaining_km_month": remaining_km_month_estimated,
-            "estimated_km_month_end": estimated_km_month_end,
-            
-            # Monat - Tatsächlich
-            "remaining_km_month_actual": remaining_km_month_actual,
-            "km_driven_this_month": km_driven_this_month,
-            "allowed_km_this_month": allowed_km_this_month,
-            
-            # Zeit
-            "remaining_days": max(0, remaining_days),
-            "remaining_months": round(remaining_months, 1),
-            "days_total": total_days,
-            
-            # Durchschnitt & Status
-            "km_per_day_average": km_per_day_average,
-            "km_per_month_average": km_per_month_average,
-            "progress_percentage": progress_percentage,
-            "km_difference": km_difference,
-            "status": status,
+        # Set value based on sensor type
+        value_map = {
+            SENSOR_REMAINING_KM_TOTAL: round(remaining_km_total),
+            SENSOR_REMAINING_KM_YEAR: round(remaining_km_year_estimated),
+            SENSOR_REMAINING_KM_MONTH: round(remaining_km_month_estimated),
+            SENSOR_REMAINING_KM_YEAR_ACTUAL: round(remaining_km_year_actual),
+            SENSOR_REMAINING_KM_MONTH_ACTUAL: round(remaining_km_month_actual),
+            SENSOR_ESTIMATED_KM_YEAR_END: round(estimated_km_year_end),
+            SENSOR_ESTIMATED_KM_MONTH_END: round(estimated_km_month_end),
+            SENSOR_REMAINING_DAYS: remaining_days,
+            SENSOR_REMAINING_MONTHS: round(remaining_months, 1),
+            SENSOR_TOTAL_KM_DRIVEN: round(total_km_driven),
+            SENSOR_KM_DRIVEN_THIS_MONTH: round(km_driven_this_month),
+            SENSOR_KM_DRIVEN_THIS_YEAR: round(km_driven_this_year),
+            SENSOR_KM_PER_DAY_AVERAGE: round(km_per_day, 2),
+            SENSOR_KM_PER_MONTH_AVERAGE: round(km_per_month),
+            SENSOR_ALLOWED_KM_TOTAL: round(allowed_km_total),
+            SENSOR_ALLOWED_KM_PER_MONTH: round(allowed_km_per_month),
+            SENSOR_ALLOWED_KM_THIS_YEAR: round(allowed_km_this_year),
+            SENSOR_ALLOWED_KM_THIS_MONTH: round(allowed_km_this_month),
+            SENSOR_DAYS_TOTAL: total_days,
+            SENSOR_PROGRESS_PERCENTAGE: round(progress, 1),
+            SENSOR_KM_DIFFERENCE: round(km_difference),
+            SENSOR_STATUS: status,
         }
 
-    async def async_update(self) -> None:
-        """Update the sensor."""
-        calculations = self._calculate_values()
-        
-        if calculations:
-            self._attr_native_value = calculations.get(self._sensor_type)
-        else:
-            self._attr_native_value = None
+        self._attr_native_value = value_map.get(self._sensor_type)
+
+        # Convert to miles if imperial
+        if not self._is_metric and self._attr_native_unit_of_measurement == UnitOfLength.MILES:
+            if isinstance(self._attr_native_value, (int, float)):
+                self._attr_native_value = round(self._attr_native_value * KM_TO_MILES, 2)

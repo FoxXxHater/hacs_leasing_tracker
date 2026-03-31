@@ -1,0 +1,121 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Leasing Tracker instellen",
+        "description": "Voer de details van uw leasecontract in.",
+        "data": {
+          "name": "Naam",
+          "current_km_entity": "Huidige kilometerstand (Sensor)",
+          "start_date": "Startdatum lease",
+          "end_date": "Einddatum lease",
+          "start_km": "Kilometerstand bij start",
+          "km_per_year": "Toegestane kilometers per jaar"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "De einddatum moet na de startdatum liggen.",
+      "unknown": "Er is een onbekende fout opgetreden."
+    },
+    "abort": {
+      "already_configured": "Een Leasing Tracker met deze naam bestaat al."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Leasing Tracker opties",
+        "description": "Werk de instellingen van uw Leasing Tracker bij.",
+        "data": {
+          "name": "Naam",
+          "current_km_entity": "Huidige kilometerstand (Sensor)",
+          "start_date": "Startdatum lease",
+          "end_date": "Einddatum lease",
+          "start_km": "Kilometerstand bij start",
+          "km_per_year": "Toegestane kilometers per jaar"
+        }
+      }
+    },
+    "error": {
+      "end_before_start": "De einddatum moet na de startdatum liggen.",
+      "unknown": "Er is een onbekende fout opgetreden."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "remaining_km_total": {
+        "name": "Resterende Afstand Totaal"
+      },
+      "remaining_km_year": {
+        "name": "Geschatte Resterende Afstand Dit Jaar"
+      },
+      "remaining_km_month": {
+        "name": "Geschatte Resterende Afstand Deze Maand"
+      },
+      "remaining_km_year_actual": {
+        "name": "Resterende Afstand Dit Jaar"
+      },
+      "remaining_km_month_actual": {
+        "name": "Resterende Afstand Deze Maand"
+      },
+      "estimated_km_year_end": {
+        "name": "Geschatte Afstand Einde Jaar"
+      },
+      "estimated_km_month_end": {
+        "name": "Geschatte Afstand Einde Maand"
+      },
+      "remaining_days": {
+        "name": "Resterende Dagen"
+      },
+      "remaining_months": {
+        "name": "Resterende Maanden"
+      },
+      "total_km_driven": {
+        "name": "Gereden Afstand Totaal"
+      },
+      "km_driven_this_month": {
+        "name": "Gereden Afstand Deze Maand"
+      },
+      "km_driven_this_year": {
+        "name": "Gereden Afstand Dit Jaar"
+      },
+      "km_per_day_average": {
+        "name": "Gemiddelde Afstand per Dag"
+      },
+      "km_per_month_average": {
+        "name": "Gemiddelde Afstand per Maand"
+      },
+      "allowed_km_total": {
+        "name": "Toegestane Afstand Totaal"
+      },
+      "allowed_km_per_month": {
+        "name": "Toegestane Afstand per Maand (Gemiddeld)"
+      },
+      "allowed_km_this_year": {
+        "name": "Toegestane Afstand Dit Jaar"
+      },
+      "allowed_km_this_month": {
+        "name": "Toegestane Afstand Deze Maand"
+      },
+      "days_total": {
+        "name": "Leaseduur in Dagen"
+      },
+      "progress_percentage": {
+        "name": "Voortgang"
+      },
+      "km_difference": {
+        "name": "Afstand Verschil met Plan"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "on_plan": "Volgens Plan",
+          "over_plan": "Boven Plan",
+          "significantly_over_plan": "Ver Boven Plan",
+          "under_plan": "Onder Plan"
+        }
+      }
+    }
+  }
+}

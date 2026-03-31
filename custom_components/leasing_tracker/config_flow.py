@@ -19,6 +19,7 @@ from .const import (
     CONF_NAME,
     CONF_START_DATE,
     CONF_START_KM,
+    CONF_UNIT_SYSTEM,
     DOMAIN,
 )
 
@@ -70,6 +71,12 @@ class LeasingTrackerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Required(CONF_END_DATE): selector.DateSelector(),
                 vol.Required(CONF_START_KM, default=0): cv.positive_int,
                 vol.Required(CONF_KM_PER_YEAR, default=10000): cv.positive_int,
+                vol.Required(CONF_UNIT_SYSTEM, default="metric"): selector.SelectSelector(
+                    selector.SelectSelectorConfig(
+                        options=["metric", "imperial"],
+                        translation_key="unit_system",
+                    )
+                ),
             }
         )
 
@@ -146,6 +153,15 @@ class LeasingTrackerOptionsFlow(config_entries.OptionsFlow):
                     CONF_KM_PER_YEAR,
                     default=self._config_entry.data.get(CONF_KM_PER_YEAR, 10000),
                 ): cv.positive_int,
+                vol.Required(
+                    CONF_UNIT_SYSTEM,
+                    default=self._config_entry.data.get(CONF_UNIT_SYSTEM, "metric"),
+                ): selector.SelectSelector(
+                    selector.SelectSelectorConfig(
+                        options=["metric", "imperial"],
+                        translation_key="unit_system",
+                    )
+                ),
             }
         )
 

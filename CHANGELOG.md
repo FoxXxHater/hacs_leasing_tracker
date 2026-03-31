@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.1.5] - 30-03-2025
+
+### Added
+- 🇺🇸 **Imperial Units Support (Miles)**
+  - New option in setup: Choose between Metric (km) or Imperial (miles)
+  - All distance sensors automatically convert to miles when imperial is selected
+  - Available in both initial setup and options dialog
+  
+### Fixed
+- ✅ **Status translations now working!**
+  - Status values ("Im Plan", "Over Plan", etc.) now properly translate
+  - Changed status to ENUM sensor with translated states
+  - Fixed: "Deutlich über Plan" showing in English HA
+
+### Technical Changes
+- Status sensor now uses `device_class: ENUM` with state translations
+- Added conversion factors: KM_TO_MILES (0.621371) and MILES_TO_KM (1.609344)
+- Automatic unit conversion based on `unit_system` config
+- All distance sensors respect the chosen unit system
+
+## [1.1.4] - 30-03-2026
+
+### Fixed
+- ✅ **Multi-language support now working!**
+  - Entity names now respect Home Assistant language settings
+  - English users see English names
+  - German users see German names  
+  - Dutch users see Dutch names
+- 🔧 Changed from hardcoded German names to translation_key system
+- 🌍 Sensors properly translate based on user's HA language
+
+### Added
+- 🇳🇱 **Dutch translation** (nl.json)
+- 📖 Complete English translations for all entities
+
+### Changed
+- Refactored sensor.py to use `_attr_translation_key` instead of `_attr_name`
+- All sensor names now come from translation files
+- Cangelog now will be written on englisch
+
+
 ## [1.1.3] - 04-02-2026
 
 - "OptionsFlow" Fehler behoben

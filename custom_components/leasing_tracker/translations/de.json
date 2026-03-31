@@ -10,7 +10,8 @@
           "start_date": "Start-Datum des Leasings",
           "end_date": "End-Datum des Leasings",
           "start_km": "Kilometerstand bei Start",
-          "km_per_year": "Erlaubte Kilometer pro Jahr"
+          "km_per_year": "Erlaubte Kilometer pro Jahr",
+          "unit_system": "Einheitensystem"
         }
       }
     },
@@ -33,7 +34,8 @@
           "start_date": "Start-Datum des Leasings",
           "end_date": "End-Datum des Leasings",
           "start_km": "Kilometerstand bei Start",
-          "km_per_year": "Erlaubte Kilometer pro Jahr"
+          "km_per_year": "Erlaubte Kilometer pro Jahr",
+          "unit_system": "Einheitensystem"
         }
       }
     },
@@ -45,25 +47,25 @@
   "entity": {
     "sensor": {
       "remaining_km_total": {
-        "name": "Verbleibende KM Gesamt"
+        "name": "Verbleibende Strecke Gesamt"
       },
       "remaining_km_year": {
-        "name": "Schätzung Verbleibende KM dieses Jahr"
+        "name": "Schätzung Verbleibende Strecke dieses Jahr"
       },
       "remaining_km_month": {
-        "name": "Schätzung Verbleibende KM diesen Monat"
+        "name": "Schätzung Verbleibende Strecke diesen Monat"
       },
       "remaining_km_year_actual": {
-        "name": "Verbleibende KM dieses Jahr"
+        "name": "Verbleibende Strecke dieses Jahr"
       },
       "remaining_km_month_actual": {
-        "name": "Verbleibende KM diesen Monat"
+        "name": "Verbleibende Strecke diesen Monat"
       },
       "estimated_km_year_end": {
-        "name": "Schätzung KM am Jahresende"
+        "name": "Geschätzte Strecke am Jahresende"
       },
       "estimated_km_month_end": {
-        "name": "Schätzung KM am Monatsende"
+        "name": "Geschätzte Strecke am Monatsende"
       },
       "remaining_days": {
         "name": "Verbleibende Tage"
@@ -72,31 +74,31 @@
         "name": "Verbleibende Monate"
       },
       "total_km_driven": {
-        "name": "Gefahrene KM"
+        "name": "Gefahrene Strecke"
       },
       "km_driven_this_month": {
-        "name": "Gefahrene KM diesen Monat"
+        "name": "Gefahrene Strecke diesen Monat"
       },
       "km_driven_this_year": {
-        "name": "Gefahrene KM dieses Jahr"
+        "name": "Gefahrene Strecke dieses Jahr"
       },
       "km_per_day_average": {
-        "name": "Durchschnitt KM pro Tag"
+        "name": "Durchschnittliche Strecke pro Tag"
       },
       "km_per_month_average": {
-        "name": "Durchschnitt KM pro Monat"
+        "name": "Durchschnittliche Strecke pro Monat"
       },
       "allowed_km_total": {
-        "name": "Erlaubte KM Gesamt"
+        "name": "Erlaubte Strecke Gesamt"
       },
       "allowed_km_per_month": {
-        "name": "Erlaubte KM pro Monat (Durchschnitt)"
+        "name": "Erlaubte Strecke pro Monat (Durchschnitt)"
       },
       "allowed_km_this_year": {
-        "name": "Erlaubte KM dieses Jahr"
+        "name": "Erlaubte Strecke dieses Jahr"
       },
       "allowed_km_this_month": {
-        "name": "Erlaubte KM diesen Monat"
+        "name": "Erlaubte Strecke diesen Monat"
       },
       "days_total": {
         "name": "Leasingdauer in Tagen"
@@ -105,10 +107,24 @@
         "name": "Fortschritt"
       },
       "km_difference": {
-        "name": "KM Differenz zum Plan"
+        "name": "Strecken-Differenz zum Plan"
       },
       "status": {
-        "name": "Status"
+        "name": "Status",
+        "state": {
+          "on_plan": "Im Plan",
+          "over_plan": "Über Plan",
+          "significantly_over_plan": "Deutlich über Plan",
+          "under_plan": "Unter Plan"
+        }
+      }
+    }
+  },
+  "selector": {
+    "unit_system": {
+      "options": {
+        "metric": "Metrisch (km)",
+        "imperial": "Imperial (Meilen)"
       }
     }
   }

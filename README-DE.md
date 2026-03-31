@@ -40,7 +40,7 @@ A huge Thanks to all great Dev out there!
 - ✅ **UI-Konfiguration** - Keine YAML-Konfiguration nötig
 - ✅ **Mehrere Fahrzeuge** - Beliebig viele Leasingverträge parallel
 - ✅ **HACS kompatibel** - Einfache Installation und Updates
-- ✅ **Deutsch + English** - Vollständige Übersetzungen
+- ✅ **Deutsch + English + Niederländisch** - Vollständige Übersetzungen
 
 ## 🔦 Passend dazu
 

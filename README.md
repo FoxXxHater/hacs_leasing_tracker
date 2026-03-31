@@ -35,6 +35,16 @@ A huge Thanks to all great Dev out there!
 
 ## <a href="https://github.com/FoxXxHater/leasing-tracker/blob/main/README-DE.md">Deutsche README
 
+## ✨ What's New in v1.1.5
+
+🇺🇸 **Imperial Units (Miles) Support!**
+- Choose between Metric (km) or Imperial (miles) during setup
+- All sensors automatically show values in your preferred unit
+- Perfect for US, UK, and other imperial-using countries
+
+✅ **Translation Fixed!**
+- Values now properly translate
+
 ## ✨ Features
 
 - ✅ **22 automatic sensors** - Comprehensive monitoring of all leasing data
@@ -42,7 +52,7 @@ A huge Thanks to all great Dev out there!
 - ✅ **UI configuration** - No YAML configuration needed
 - ✅ **Multiple vehicles** - Any number of leasing contracts in parallel
 - ✅ **HACS compatible** - Easy installation and updates
-- ✅ **German + English** - Full translations
+- ✅ **German + English + Dutch** - Full translations
 
 ## 📦 Companion project
 

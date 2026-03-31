@@ -7,10 +7,11 @@
         "data": {
           "name": "Name",
           "current_km_entity": "Current Mileage (Sensor)",
-          "start_date": "Lease Start Date",
-          "end_date": "Lease End Date",
+          "start_date": "Leasing Start Date",
+          "end_date": "Leasing End Date",
           "start_km": "Mileage at Start",
-          "km_per_year": "Allowed Kilometers per Year"
+          "km_per_year": "Allowed Kilometers per Year",
+          "unit_system": "Unit System"
         }
       }
     },
@@ -30,10 +31,11 @@
         "data": {
           "name": "Name",
           "current_km_entity": "Current Mileage (Sensor)",
-          "start_date": "Lease Start Date",
-          "end_date": "Lease End Date",
+          "start_date": "Leasing Start Date",
+          "end_date": "Leasing End Date",
           "start_km": "Mileage at Start",
-          "km_per_year": "Allowed Kilometers per Year"
+          "km_per_year": "Allowed Kilometers per Year",
+          "unit_system": "Unit System"
         }
       }
     },
@@ -45,25 +47,25 @@
   "entity": {
     "sensor": {
       "remaining_km_total": {
-        "name": "Remaining KM Total"
+        "name": "Remaining Distance Total"
       },
       "remaining_km_year": {
-        "name": "Estimated Remaining KM This Year"
+        "name": "Estimated Remaining Distance This Year"
       },
       "remaining_km_month": {
-        "name": "Estimated Remaining KM This Month"
+        "name": "Estimated Remaining Distance This Month"
       },
       "remaining_km_year_actual": {
-        "name": "Remaining KM This Year"
+        "name": "Remaining Distance This Year"
       },
       "remaining_km_month_actual": {
-        "name": "Remaining KM This Month"
+        "name": "Remaining Distance This Month"
       },
       "estimated_km_year_end": {
-        "name": "Estimated KM at Year End"
+        "name": "Estimated Distance at Year End"
       },
       "estimated_km_month_end": {
-        "name": "Estimated KM at Month End"
+        "name": "Estimated Distance at Month End"
       },
       "remaining_days": {
         "name": "Remaining Days"
@@ -72,43 +74,57 @@
         "name": "Remaining Months"
       },
       "total_km_driven": {
-        "name": "Total KM Driven"
+        "name": "Total Distance Driven"
       },
       "km_driven_this_month": {
-        "name": "KM Driven This Month"
+        "name": "Distance Driven This Month"
       },
       "km_driven_this_year": {
-        "name": "KM Driven This Year"
+        "name": "Distance Driven This Year"
       },
       "km_per_day_average": {
-        "name": "Average KM per Day"
+        "name": "Average Distance per Day"
       },
       "km_per_month_average": {
-        "name": "Average KM per Month"
+        "name": "Average Distance per Month"
       },
       "allowed_km_total": {
-        "name": "Allowed KM Total"
+        "name": "Allowed Distance Total"
       },
       "allowed_km_per_month": {
-        "name": "Allowed KM per Month (Average)"
+        "name": "Allowed Distance per Month (Average)"
       },
       "allowed_km_this_year": {
-        "name": "Allowed KM This Year"
+        "name": "Allowed Distance This Year"
       },
       "allowed_km_this_month": {
-        "name": "Allowed KM This Month"
+        "name": "Allowed Distance This Month"
       },
       "days_total": {
-        "name": "Lease Duration in Days"
+        "name": "Leasing Duration in Days"
       },
       "progress_percentage": {
         "name": "Progress"
       },
       "km_difference": {
-        "name": "KM Difference to Plan"
+        "name": "Distance Difference to Plan"
       },
       "status": {
-        "name": "Status"
+        "name": "Status",
+        "state": {
+          "on_plan": "On Plan",
+          "over_plan": "Over Plan",
+          "significantly_over_plan": "Significantly Over Plan",
+          "under_plan": "Under Plan"
+        }
+      }
+    }
+  },
+  "selector": {
+    "unit_system": {
+      "options": {
+        "metric": "Metric (km)",
+        "imperial": "Imperial (miles)"
       }
     }
   }
