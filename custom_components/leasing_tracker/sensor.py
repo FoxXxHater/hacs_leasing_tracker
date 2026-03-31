@@ -216,13 +216,13 @@ class LeasingTrackerSensor(SensorEntity):
             SENSOR_KM_PER_DAY_AVERAGE: {
                 "translation_key": "km_per_day_average",
                 "icon": "mdi:chart-line",
-                "unit": "km/day",
+                "unit": "km/day" if self._is_metric else "mi/day",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_KM_PER_MONTH_AVERAGE: {
                 "translation_key": "km_per_month_average",
                 "icon": "mdi:chart-bar",
-                "unit": "km/month",
+                "unit": "km/month" if self._is_metric else "mi/month",
                 "state_class": SensorStateClass.MEASUREMENT,
             },
             SENSOR_ALLOWED_KM_TOTAL: {
