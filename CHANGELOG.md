@@ -1,19 +1,36 @@
 # Changelog
 
+## [1.2.4] - 31-03-2026
+
+### Fixed
+- 🐛 **CRITICAL: Sensor unit detection now works correctly**
+  - Integration now reads `unit_of_measurement` from the odometer sensor
+  - Automatically converts sensor values based on their unit:
+    - If sensor is in `mi`/`miles` → converts to km for calculations
+    - If sensor is in `km` → uses directly
+    - If no unit specified → assumes km
+  - Fixes: Wrong calculations when sensor unit differs from chosen unit system
+  - Example: Sensor shows "2,294 mi" → correctly uses 2,294 miles (not treating as km)
+
+### Technical
+- Added sensor unit detection: `sensor_unit = current_km_state.attributes.get('unit_of_measurement', 'km')`
+- Automatic conversion: sensor value → km (for internal calculations) → display unit
+- All calculations now work correctly regardless of sensor's unit
+
+## [1.2.3] - 31-03-2026
+
+### Fixed
+- 🐛 Imperial units config values now convert correctly
+
 ## [1.2.2] - 31-03-2026
 
 ### Fixed
-- 🐛 **Average sensor units now respect unit system**
-  - Fixed: "Average Distance per Day" showing "km/day" even when Imperial selected
-  - Fixed: "Average Distance per Month" showing "km/month" even when Imperial selected
-  - Now correctly shows "mi/day" and "mi/month" for Imperial units
+- 🐛 Average sensor units (mi/day, mi/month)
 
 ## [1.2.1] - 31-03-2026
 
 ### Changed
-- 🔄 **Unit-neutral labels in setup dialog**
-  - Changed "Allowed Kilometers per Year" → "Allowed Distance per Year"
-  - Labels now work for both km and miles
+- 🔄 Unit-neutral labels
 
 
 ## [1.2.0] - 30-03-2026
