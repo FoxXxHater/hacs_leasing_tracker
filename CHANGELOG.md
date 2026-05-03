@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.3.0] - 03-05-2026 ⚠️ BREAKING CHANGES
+
+**You have to delete the old entities and create it new!**
+
+### Fixed
+- 🐛 **Sensor display unit now actually matches the source entity's unit**
+  - Distance sensors are now displayed in the unit of the source odometer entity (e.g. `mi` if the odometer reports in miles), regardless of Home Assistant's global metric/imperial setting
+  - Fixes: Sensors being shown in `km` even when the source entity used `mi` and the user had selected Imperial in the Leasing Tracker setup
+  - Root cause: Home Assistant auto-converts `device_class: distance` sensors to the user's HA-wide unit system. The integration now overrides this behaviour explicitly per sensor.
+  - Works for both newly created and already-existing entities (the entity registry override is updated on startup if it doesn't match the detected source unit)
+
+### Added
+- 🔍 **Automatic unit detection from the source odometer entity**
+  - The integration now reads the `unit_of_measurement` attribute from the configured odometer entity and uses that unit for all generated sensors
+  - Recognised mile units: `mi`, `miles`, `mile` (case-insensitive, whitespace-tolerant)
+  - Recognised kilometer units: `km`, `kilometer`, `kilometers`, `kilometre`, `kilometres` (case-insensitive, whitespace-tolerant)
+  - Detection is re-checked on every update, so sensors react if the source entity's unit changes or is set after startup
+  - The manual "Unit System" choice in the setup/options dialog now serves as a fallback for source entities that don't expose a `unit_of_measurement` (e.g. plain `input_number` helpers without a unit)
+
+### Changed
+- 📋 **Clearer debug logging for unit detection**
+  - Debug log now states explicitly whether the unit came from the source entity or from the fallback, e.g. `is_metric=False via source unit 'mi' -> miles` or `is_metric=True via fallback (source has no unit_of_measurement)`
+  - Makes it possible to diagnose unit-related issues without guessing
+
+### Technical
+- New helper `_detect_source_unit_is_metric()` returns both the detected unit system and a human-readable reason
+- New method `_sync_registry_unit()` updates the entity registry's `unit_of_measurement` option for distance sensors when it doesn't match the detected unit; uses `entity_registry.async_update_entity_options()`
+- Added `_attr_suggested_unit_of_measurement` for all `device_class: distance` sensors so newly registered entities pick up the right unit on first creation
+- Unit detection now runs in `__init__`, in `async_added_to_hass()` (in case the source entity wasn't ready yet), and in every `update()` cycle
+- Distance-to-miles conversion is now applied uniformly to all distance sensors at the end of `update()`, instead of only the sensor whose attribute happened to be set to `MILES`
+
 ## [1.2.4] - 31-03-2026
 
 ### Fixed
